@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: theme("colors.app-bg");
+  color: theme("colors.ink");
+  font-family: var(--font-sans);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tabular figures for counts, dates, badges. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-eyebrow font-semibold uppercase tracking-[0.06em] text-faint;
+  }
+  .card {
+    @apply rounded-card border border-border bg-surface;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-[10px] px-3.5 py-2 text-body font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-[#0c7a6e];
+  }
+  .btn-secondary {
+    @apply btn border border-border bg-surface text-ink hover:bg-surface-2;
+  }
+  .btn-ghost {
+    @apply btn text-muted hover:bg-surface-2 hover:text-ink;
+  }
+  .input {
+    @apply w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-body text-ink outline-none placeholder:text-faint focus:border-accent focus:ring-2 focus:ring-accent-soft;
+  }
+  .label {
+    @apply mb-1.5 block text-meta font-medium text-muted;
+  }
+  .count-badge {
+    @apply tnum inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-badge px-1.5 text-[12px] font-semibold text-white;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold;
+  }
+}
+
+/* Reduced motion (a11y floor). */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Visible keyboard focus. */
+:focus-visible {
+  outline: 2px solid theme("colors.accent");
+  outline-offset: 2px;
+}
