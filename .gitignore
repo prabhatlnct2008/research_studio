@@ -1,0 +1,21 @@
+/node_modules
+/.next
+/out
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# local database + uploaded blobs (dev fallback)
+local.db
+local.db-*
+/.localblob
+
+# env
+.env
+.env.local
+.env*.local
+
+.DS_Store
+*.pem
+npm-debug.log*
+.vercel
