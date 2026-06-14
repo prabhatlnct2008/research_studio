@@ -50,6 +50,23 @@ file (`./local.db`), local-disk blob storage (`./.localblob`), and console email
 Default seeded superadmin: `admin@studio.local` / `ChangeMe!123` (override via
 `SUPERADMIN_*` env vars before seeding).
 
+### Raw SQL setup (e.g. Turso shell)
+
+If you'd rather apply schema + seed by hand instead of the npm scripts:
+
+```bash
+turso db shell <your-db> < sql/01_schema.sql   # CREATE TABLE statements
+turso db shell <your-db> < sql/02_seed.sql     # INSERT seed data (roles, superadmin, gates, demo)
+```
+
+`sql/01_schema.sql` mirrors the Drizzle migration; `sql/02_seed.sql` is
+idempotent (`INSERT OR IGNORE`) and embeds a bcrypt hash for the default admin
+password. Regenerate the seed (e.g. with a different admin email/password) via:
+
+```bash
+SUPERADMIN_EMAIL=you@co.com SUPERADMIN_PASSWORD='Str0ng!pw' npx tsx sql/generate-seed.ts
+```
+
 ## Production env vars
 
 | Var | Purpose |
